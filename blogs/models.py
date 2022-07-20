@@ -1,23 +1,9 @@
-from tabnanny import verbose
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from ckeditor.fields import RichTextField
-
-class CommentModel(models.Model):
-    name = models.CharField(max_length=255, verbose_name=_('name'))
-    email = models.EmailField(verbose_name=_('email'))
-    phone = models.CharField(max_length=13, verbose_name=_('phone'))
-    comment = models.TextField(verbose_name=_('comment'))
-    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created at'))
+from ckeditor_uploader.fields import RichTextUploadingField
 
 
-    def __str__(self):
-        return self.name
-
-
-    class Meta:
-        verbose_name = _('comment')
-        verbose_name_plural = _('comments')    
 
 class AutherModel(models.Model):
     full_name = models.CharField(max_length=255, verbose_name=_('full name'))
@@ -43,7 +29,7 @@ class PostTagModel(models.Model):
 
 class PostModel(models.Model):
     title = models.CharField(max_length=255, verbose_name=_('title'))
-    body = RichTextField(verbose_name=_('body'))
+    body = RichTextUploadingField(verbose_name=_('body'))
     main_image = models.ImageField(upload_to='main_images/', verbose_name=_('main image'))
     banner = models.ImageField(upload_to='post_banners/', verbose_name=_('banner'))
     auther = models.ForeignKey(AutherModel, related_name='posts' ,on_delete=models.RESTRICT)
@@ -55,4 +41,21 @@ class PostModel(models.Model):
 
     class Meta:
         verbose_name = _('post')
-        verbose_name_plural = _('posts')    
+        verbose_name_plural = _('posts')  
+
+class CommentModel(models.Model):
+    name = models.CharField(max_length=255, verbose_name=_('name'))
+    email = models.EmailField(verbose_name=_('email'))
+    phone = models.CharField(max_length=13, verbose_name=_('phone'))
+    comment = models.TextField(verbose_name=_('comment'))
+    # post = models.ForeignKey(PostModel, on_delete=models.CASCADE, related_name='comments' ,verbose_name=_('post'))
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created at'))
+
+
+    def __str__(self):
+        return self.name
+
+
+    class Meta:
+        verbose_name = _('comment')
+        verbose_name_plural = _('comments')           
