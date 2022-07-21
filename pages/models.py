@@ -1,7 +1,4 @@
-from distutils.command.upload import upload
-from doctest import debug_script
-from tabnanny import verbose
-from typing import Collection
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
