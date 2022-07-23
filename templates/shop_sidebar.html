@@ -17,7 +17,9 @@
                         <div class="shop__sidebar__categories">
                             <ul class="nice-scroll">
                                 {% for cat in categories %}
-                                    <li><a href="?cat={{ cat.pk }}" class="{% if request.GET.cat == cat.pk|stringformat:'i' %}text-dark{% endif %}">{{ cat.name }} ({{ cat.products.count }})</a></li>
+                                    <li><a onclick="addUrlParameter('cat', {{ cat.pk }})" style="cursor: pointer;"
+                                        class="{% if request.GET.cat == cat.pk|stringformat:'i' %}text-dark{% endif %}">{{ cat.name }} ({{ cat.products.count }})
+                                    </a></li>
                                 {% endfor %}
                             </ul>
                         </div>
