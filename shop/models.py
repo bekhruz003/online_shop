@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from ckeditor_uploader.fields import RichTextUploadingField
 
@@ -68,6 +69,7 @@ class ProductModel(models.Model):
     short_description = models.CharField(max_length=255, verbose_name=_('short description'))
     long_description = RichTextUploadingField(verbose_name=_('long description'))
     price = models.FloatField(verbose_name=_('price'))
+    real_price = models.FloatField(verbose_name=_('real price'), default=0)
     discount = models.PositiveSmallIntegerField(default=0, verbose_name=_('discount'))
     main_image = models.ImageField(upload_to='products/', verbose_name=_('main image'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created at'))

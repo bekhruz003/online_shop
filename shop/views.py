@@ -1,5 +1,5 @@
-
-from unicodedata import category
+from django.db.models import Min, Max
+# from unicodedata import category
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 
@@ -53,6 +53,7 @@ class ShopView(ListView):
         data['sizes'] = SizeModel.objects.all()
         data['brands'] = BrandModel.objects.all()
         data['colors'] = ColorModel.objects.all()
+        data['min_price'], data['max_price'] = ProductModel.objects.aggregate(Min('price'), Max('price')).values()
         return data   
 
 
