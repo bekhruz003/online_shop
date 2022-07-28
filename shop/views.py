@@ -42,6 +42,8 @@ class ShopView(ListView):
             qs = qs.order_by('price')
         elif sort == '-price':
             qs = qs.order_by('-price') 
+        elif sort == 'sale':
+            qs = qs.filter(sale=True)    
 
         price = self.request.GET.get('price')
         if price:

@@ -53,7 +53,7 @@
                                     <option value="">----</option>
                                     <option {% if request.GET.sort == 'price' %}selected{% endif %} value="price">Low To High</option>
                                     <option {% if request.GET.sort == '-price' %}selected{% endif %} value="-price">High To Low</option>
-                                    <!-- <option value="sale">Sale</option> -->
+                                    <option {% if request.GET.sort == 'sale' %}selected{% endif %} value="sale">Sale</option>
                                 </select>
                             </div>
                         </div>
